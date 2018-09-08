@@ -2,21 +2,21 @@
 ##                                                                          ##
 ##                            DBCA response file                            ##
 ##                            ------------------                            ##
-## Copyright(c) Oracle Corporation 1998,2017. All rights reserved.         ##
+## Copyright(c) Oracle Corporation 1998,2018. All rights reserved.          ##
 ##                                                                          ##
-## Specify values for the variables listed below to customize 			    ##
-## your installation.                                         			    ##
-##                                                            			    ##
-## Each variable is associated with a comment. The comment    			    ##
-## can help to populate the variables with the appropriate   			    ##
-## values.                                                  			    ##
-##                                                               			##
-## IMPORTANT NOTE: This file contains plain text passwords and   			##
-## should be secured to have read permission only by oracle user 			##
-## or db administrator who owns this installation.               			##
+## Specify values for the variables listed below to customize               ##
+## your installation.                                         		        ##
+##                                                            		        ##
+## Each variable is associated with a comment. The comment    		        ##
+## can help to populate the variables with the appropriate   		        ##
+## values.                                                  		        ##
+##                                                               	        ##
+## IMPORTANT NOTE: This file contains plain text passwords and   	        ##
+## should be secured to have read permission only by oracle user 	        ##
+## or db administrator who owns this installation.               	        ##
 ##############################################################################
 #-------------------------------------------------------------------------------
-# Do not change the following system generated value. 
+# Do not change the following system generated value.
 #-------------------------------------------------------------------------------
 responseFileVersion=/oracle/assistants/rspfmt_dbca_response_schema_v12.2.0
 
@@ -42,9 +42,9 @@ gdbName=###ORACLE_SID###
 sid=###ORACLE_SID###
 
 #-----------------------------------------------------------------------------
-# Name          : createAsContainerDatabase 
+# Name          : createAsContainerDatabase
 # Datatype      : boolean
-# Description   : flag to create database as container database 
+# Description   : flag to create database as container database
 # Valid values  : Check Oracle12c Administrator's Guide
 # Default value : false
 # Mandatory     : No
@@ -55,14 +55,14 @@ createAsContainerDatabase=true
 # Name          : numberOfPDBs
 # Datatype      : Number
 # Description   : Specify the number of pdb to be created
-# Valid values  : 0 to 4094
+# Valid values  : 0 to 252
 # Default value : 0
 # Mandatory     : No
 #-----------------------------------------------------------------------------
 numberOfPDBs=0
 
 #-----------------------------------------------------------------------------
-# Name          : pdbName 
+# Name          : pdbName
 # Datatype      : String
 # Description   : Specify the pdbname/pdbanme prefix if one or more pdb need to be created
 # Valid values  : Check Oracle12c Administrator's Guide
@@ -89,7 +89,7 @@ pdbAdminPassword=###ORACLE_PWD###
 # Default value : None
 # Mandatory     : Yes
 #-----------------------------------------------------------------------------
-templateName=General_Purpose.dbc
+templateName=MinimalDB.dbt
 
 #-----------------------------------------------------------------------------
 # Name          : sysPassword
@@ -110,27 +110,6 @@ sysPassword=###ORACLE_PWD###
 # Mandatory     : Yes
 #-----------------------------------------------------------------------------
 systemPassword=###ORACLE_PWD###
-
-#-----------------------------------------------------------------------------
-# Name          : emConfiguration
-# Datatype      : String
-# Description   : Enterprise Manager Configuration Type
-# Valid values  : CENTRAL|DBEXPRESS|BOTH|NONE
-# Default value : NONE
-# Mandatory     : No
-#-----------------------------------------------------------------------------
-#emConfiguration=DBEXPRESS
-
-#-----------------------------------------------------------------------------
-# Name          : emExpressPort
-# Datatype      : Number
-# Description   : Enterprise Manager Configuration Type
-# Valid values  : Check Oracle12c Administrator's Guide
-# Default value : NONE
-# Mandatory     : No, will be picked up from DBEXPRESS_HTTPS_PORT env variable
-#                 or auto generates a free port between 5500 and 5599
-#-----------------------------------------------------------------------------
-#emExpressPort=5500
 
 #-----------------------------------------------------------------------------
 # Name          : dbsnmpPassword
@@ -170,18 +149,47 @@ nationalCharacterSet=AL16UTF16
 # Default value : None
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-initParams=db_recovery_file_dest=/opt/oracle/oradata/fast_recovery_area,audit_trail=none,audit_sys_operations=false
+initParams=undo_tablespace=UNDOTBS1,enable_pluggable_database=true,sga_target=1536MB,db_block_size=8192BYTES,db_recovery_file_dest=/opt/oracle/oradata/fast_recovery_area,audit_trail=none,audit_sys_operations=false
 
 #-----------------------------------------------------------------------------
 # Name          : listeners
 # Datatype      : String
 # Description   : Specifies list of listeners to register the database with.
-#		  By default the database is configured for all the listeners specified in the 
-#		  $ORACLE_HOME/network/admin/listener.ora 	
+#		  By default the database is configured for all the listeners specified in the
+#		  $ORACLE_HOME/network/admin/listener.ora
 # Valid values  : The list should be comma separated like "listener1,listener2".
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-#listeners=LISTENER
+listeners=LISTENER
+
+#-----------------------------------------------------------------------------
+# Name          : variables
+# Datatype      : String
+# Description   : comma separated list of name=value pairs. Overrides variables defined in variablefile and templates
+# Default value : None
+# Mandatory     : NO
+#-----------------------------------------------------------------------------
+variables=ORACLE_BASE_HOME=/opt/oracle/,DB_UNIQUE_NAME=###ORACLE_SID###,ORACLE_BASE=/opt/oracle/,DB_NAME=###ORACLE_SID##,ORACLE_HOME=/opt/oracle/product/18.3/dbhome_1/,SID=###ORACLE_SID##
+
+#-----------------------------------------------------------------------------
+# Name          : sampleSchema
+# Datatype      : Boolean
+# Description   : Specifies whether or not to add the Sample Schemas to your database
+# Valid values  : TRUE \ FALSE
+# Default value : FASLE
+# Mandatory     : No
+#-----------------------------------------------------------------------------
+sampleSchema=false
+
+#-----------------------------------------------------------------------------
+# Name          : databaseType
+# Datatype      : String
+# Description   : used for memory distribution when memoryPercentage specified
+# Valid values  : MULTIPURPOSE|DATA_WAREHOUSING|OLTP
+# Default value : MULTIPURPOSE
+# Mandatory     : NO
+#-----------------------------------------------------------------------------
+databaseType=MULTIPURPOSE
 
 #-----------------------------------------------------------------------------
 # Name          : automaticMemoryManagement
@@ -197,10 +205,8 @@ automaticMemoryManagement=FALSE
 # Name          : totalMemory
 # Datatype      : String
 # Description   : total memory in MB to allocate to Oracle
-# Valid values  : 
-# Default value : 
+# Valid values  :
+# Default value :
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
 totalMemory=2048
-
-redoLogFileSize=50

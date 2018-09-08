@@ -21,6 +21,7 @@ mkdir  $PDB_BASE_DIR && \
 mkdir -p $ORACLE_HOME && \
 chmod ug+x $ORACLE_BASE/*.sh && \
 yum -y install oracle-database-preinstall-18c unzip tar openssl && \
+yum clean all && \
 rm -rf /var/cache/yum && \
 echo oracle:oracle | chpasswd && \
 chown -R oracle:dba $ORACLE_BASE && \
