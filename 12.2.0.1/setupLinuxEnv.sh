@@ -25,5 +25,6 @@ useradd  -u 500 -d /home/oracle -g dba -G dba,oinstall -m -s /bin/bash oracle &&
 echo oracle:oracle | chpasswd && \
 yum -y install oracle-database-server-12cR2-preinstall unzip wget tar openssl && \
 yum clean all && \
+rm -rf /var/cache/yum && \
 chown -R oracle:dba $ORACLE_BASE && \
 chown -R oracle:dba $PDB_BASE_DIR

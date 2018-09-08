@@ -34,6 +34,7 @@ ENV ORACLE_BASE=/opt/oracle \
     INSTALL_FILE_1="linuxx64_12201_database.zip" \
     INSTALL_RSP="db_inst.rsp" \
     CONFIG_RSP="dbca.rsp.tmpl" \
+    DB_TEMPLATE_FILE="MinimalDB.dbt" \
     PWD_FILE="setPassword.sh" \
     PERL_INSTALL_FILE="installPerl.sh" \
     RUN_FILE="runOracle.sh" \
@@ -59,6 +60,7 @@ ENV INSTALL_DIR=$ORACLE_BASE/install \
 RUN echo COPYING BINS
 COPY $INSTALL_FILE_1 $INSTALL_RSP $PERL_INSTALL_FILE $SETUP_LINUX_FILE $CHECK_SPACE_FILE $INSTALL_DB_BINARIES_FILE $INSTALL_DIR/
 COPY $RUN_FILE $START_FILE $STOP_FILE $CREATE_DB_FILE $CREATE_PDB_FILE $CONFIG_RSP $PWD_FILE $CLEANUP_FILE $ORACLE_BASE/
+COPY $DB_TEMPLATE_FILE $ORACLE_HOME/assistants/dbca/templates/
 
 RUN chmod ug+x $INSTALL_DIR/*.sh && \
     sync && \

@@ -47,7 +47,7 @@ sed -i -e "s|###ORACLE_EDITION###|$EDITION|g" $INSTALL_DIR/$INSTALL_RSP && \
 sed -i -e "s|###ORACLE_BASE###|$ORACLE_BASE|g" $INSTALL_DIR/$INSTALL_RSP && \
 sed -i -e "s|###ORACLE_HOME###|$ORACLE_HOME|g" $INSTALL_DIR/$INSTALL_RSP && \
 cd $INSTALL_DIR       && \
-unzip $INSTALL_FILE_1 && \
+unzip -q $INSTALL_FILE_1 && \
 rm $INSTALL_FILE_1    && \
 $INSTALL_DIR/database/runInstaller -silent -force -waitforcompletion -responsefile $INSTALL_DIR/$INSTALL_RSP -ignoresysprereqs -ignoreprereq && \
 rm -rf $INSTALL_DIR/database && \

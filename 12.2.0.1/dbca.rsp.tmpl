@@ -2,7 +2,7 @@
 ##                                                                          ##
 ##                            DBCA response file                            ##
 ##                            ------------------                            ##
-## Copyright(c) Oracle Corporation 1998,2017. All rights reserved.         ##
+## Copyright(c) Oracle Corporation 1998,2018. All rights reserved.          ##
 ##                                                                          ##
 ## Specify values for the variables listed below to customize 			    ##
 ## your installation.                                         			    ##
@@ -55,7 +55,7 @@ createAsContainerDatabase=true
 # Name          : numberOfPDBs
 # Datatype      : Number
 # Description   : Specify the number of pdb to be created
-# Valid values  : 0 to 4094
+# Valid values  : 0 to 252
 # Default value : 0
 # Mandatory     : No
 #-----------------------------------------------------------------------------
@@ -89,7 +89,7 @@ pdbAdminPassword=###ORACLE_PWD###
 # Default value : None
 # Mandatory     : Yes
 #-----------------------------------------------------------------------------
-templateName=General_Purpose.dbc
+templateName=MinimalDB.dbt
 
 #-----------------------------------------------------------------------------
 # Name          : sysPassword
@@ -110,27 +110,6 @@ sysPassword=###ORACLE_PWD###
 # Mandatory     : Yes
 #-----------------------------------------------------------------------------
 systemPassword=###ORACLE_PWD###
-
-#-----------------------------------------------------------------------------
-# Name          : emConfiguration
-# Datatype      : String
-# Description   : Enterprise Manager Configuration Type
-# Valid values  : CENTRAL|DBEXPRESS|BOTH|NONE
-# Default value : NONE
-# Mandatory     : No
-#-----------------------------------------------------------------------------
-#emConfiguration=DBEXPRESS
-
-#-----------------------------------------------------------------------------
-# Name          : emExpressPort
-# Datatype      : Number
-# Description   : Enterprise Manager Configuration Type
-# Valid values  : Check Oracle12c Administrator's Guide
-# Default value : NONE
-# Mandatory     : No, will be picked up from DBEXPRESS_HTTPS_PORT env variable
-#                 or auto generates a free port between 5500 and 5599
-#-----------------------------------------------------------------------------
-#emExpressPort=5500
 
 #-----------------------------------------------------------------------------
 # Name          : dbsnmpPassword
@@ -202,5 +181,3 @@ automaticMemoryManagement=FALSE
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
 totalMemory=2048
-
-redoLogFileSize=50
